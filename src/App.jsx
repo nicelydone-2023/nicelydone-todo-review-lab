@@ -25,16 +25,12 @@ function App(props) {
   const [filter, setFilter] = useState("All");
 
   function toggleTaskCompleted(id) {
-    const updatedTasks = tasks.map((task) => {
-      // if this task has the same ID as the edited task
-      if (id === task.id) {
-        // use object spread to make a new obkect
-        // whose `completed` prop has been inverted
-        return { ...task, completed: !task.completed };
-      }
-      return task;
-    });
-    setTasks(updatedTasks);
+    // Find the matching task and flip its completed flag in place.
+    const task = tasks.find((task) => id === task.id);
+    if (task) {
+      task.completed = !task.completed;
+    }
+    setTasks(tasks);
   }
 
   function deleteTask(id) {
