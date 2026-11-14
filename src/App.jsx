@@ -25,12 +25,14 @@ function App(props) {
   const [filter, setFilter] = useState("All");
 
   function toggleTaskCompleted(id) {
-    // Find the matching task and flip its completed flag in place.
-    const task = tasks.find((task) => id === task.id);
-    if (task) {
-      task.completed = !task.completed;
-    }
-    setTasks(tasks);
+    const updatedTasks = tasks.map((task) => {
+      // Return a new task object with completed inverted for the match.
+      if (id === task.id) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
   }
 
   function deleteTask(id) {
